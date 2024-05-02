@@ -1,36 +1,55 @@
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 const Netflix_Slider = ({ movie }) => {
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 768, min: 425 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 425, min: 0 },
+      items: 1,
+    },
+  };
   return (
     <>
-      {movie.map((curElem, id) => {
-        const {
-          original_title,
-          backdrop_path,
-          contentType,
-          genres,
-          release_date,
-        } = curElem;
-        return (
-          <div className="w-full h-full border border-black" key={id}>
-            <img
-              className="w-full h-fit"
-              src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
-              alt={original_title}
-            />
-            <div className="w-full h-fit bg-black bg-opacity-50">
-              <div className="w-full h-fit flex justify-between items-center">
-                <div className="w-full h-fit">
-                  <h1 className="text-white">{original_title}</h1>
-                  <p className="text-white">{release_date}</p>
-                </div>
-                <div className="w-full h-fit">
-                  <p className="text-white">{contentType}</p>
-                  <p className="text-white">{genres}</p>
+      <div className="m-auto">
+        <Carousel responsive={responsive} transitionDuration={500}>
+          {movie.map((curElem, id) => {
+            const { original_title, backdrop_path: image, overview } = curElem;
+            const title = original_title.substring(0, 20);
+            return (
+              <div
+                className="w-full h-fit border border-black rounded-xl relative ml-2"
+                key={id}
+              >
+                <img
+                  className="w-full h-[21rem] xl:h-[32rem] rounded-xl object-cover "
+                  src={image}
+                  alt={original_title}
+                />
+                <div className="w-full h-fit flex justify-between items-center absolute bottom-2 left-3">
+                  <h1 className="text-white font-semibold text-lg xl:text-5xl shadow-xl font-serif">
+                    {original_title.length >= 15
+                      ? `${title}...`
+                      : original_title}
+                  </h1>
                 </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </Carousel>
+      </div>
     </>
   );
 };

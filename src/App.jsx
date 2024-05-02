@@ -5,7 +5,7 @@ import Netflix_Slider from "./components/Netflix_Slider";
 
 const App = () => {
   const [movie, setMovie] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isloading, setisLoading] = useState(true);
 
   const url = "https://movies-api14.p.rapidapi.com/movies";
   const options = {
@@ -15,12 +15,14 @@ const App = () => {
       "X-RapidAPI-Host": "movies-api14.p.rapidapi.com",
     },
   };
+
   const getMoviedata = async () => {
+    setisLoading(true);
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      setLoading(false);
       console.log(data);
+      setisLoading(false);
       setMovie(data.movies);
     } catch (error) {
       console.log("Error occurred while fetching", error);
@@ -31,13 +33,15 @@ const App = () => {
     getMoviedata();
   }, []);
 
-  if (loading) {
-    <Loading />;
+  if (isloading) {
+    return <Loading />;
   }
   return (
     <>
       <Warning />
-      <Netflix_Slider movie={movie} />
+      <div className="max-w-[1500px] m-auto">
+        <Netflix_Slider movie={movie} />
+      </div>
     </>
   );
 };
