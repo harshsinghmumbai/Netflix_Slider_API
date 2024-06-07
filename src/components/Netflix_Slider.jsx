@@ -1,10 +1,9 @@
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import Carousel from "react-multi-carousel"; //logic part of carousel in react //
+import "react-multi-carousel/lib/styles.css"; // styling part of carousel in react //
 
 const Netflix_Slider = ({ movie }) => {
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },

@@ -11,6 +11,7 @@ const App = () => {
   const options = {
     method: "GET",
     headers: {
+      //API key is like a secret password thought which developer-or-user send request to System (form were is data is exists)
       "X-RapidAPI-Key": "a299113d79msh34348938dbe2dd6p1f8e72jsn7b41ae5bb3dc",
       "X-RapidAPI-Host": "movies-api14.p.rapidapi.com",
     },
